@@ -55,10 +55,16 @@ namespace TechJobsConsole
                     string columnChoice = GetUserSelection("Search", columnChoices);
 
                     // What is their search term?
-                    Console.WriteLine("\nSearch term: ");
-                    string searchTerm = Console.ReadLine().ToLower();
+                    string searchTerm;
+                    do
+                    {
+                        Console.WriteLine("\nSearch term: ");
+                        searchTerm = Console.ReadLine().ToLower();
+                    }while (searchTerm == "");
 
-                    List<Dictionary<string, string>> searchResults;
+
+
+                    List < Dictionary<string, string> > searchResults;
 
                     // Fetch results
                     if (columnChoice.Equals("all"))
@@ -102,6 +108,11 @@ namespace TechJobsConsole
                 }
 
                 string input = Console.ReadLine();
+                while (!int.TryParse(input, out int result))
+                {
+                    Console.WriteLine("Invalid input.");
+                    input = Console.ReadLine();
+                }
                 choiceIdx = int.Parse(input);
 
                 if (choiceIdx < 0 || choiceIdx >= choiceKeys.Length)

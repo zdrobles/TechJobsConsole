@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -30,8 +31,13 @@ namespace TechJobsConsole
 
         public static List<Dictionary<string, string>> FindAll()
         {
-            LoadData();
-            return AllJobs;
+            LoadData();           
+
+            Dictionary<string, string>[] allJobsArray = new Dictionary<string, string>[AllJobs.Count];
+            AllJobs.CopyTo(allJobsArray);
+            List<Dictionary<string, string>> copyOfAllJobs = allJobsArray.ToList();
+
+            return copyOfAllJobs;
         }
 
         /*
@@ -53,6 +59,7 @@ namespace TechJobsConsole
                     values.Add(aValue);
                 }
             }
+            values.Sort();
             return values;
         }
 
@@ -72,7 +79,7 @@ namespace TechJobsConsole
                     jobs.Add(row);
                 }
             }
-
+            jobs.Sort();
             return jobs;
         }
 
