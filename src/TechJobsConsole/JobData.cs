@@ -19,10 +19,14 @@ namespace TechJobsConsole
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
 
             foreach (Dictionary<string, string> row in AllJobs)
-            {               
-                if (row["name"].ToLower().Contains(value) || row["employer"].ToLower().Contains(value) || row["location"].ToLower().Contains(value) || row["position type"].ToLower().Contains(value) || row["core competency"].ToLower().Contains(value))
+            {
+                foreach (KeyValuePair<string, string> kvp in row)
                 {
-                    jobs.Add(row);
+                    if (kvp.Value.ToLower().Contains(value.ToLower()))
+                    {
+                        jobs.Add(row);
+                        break;
+                    }
                 }
             }
 
@@ -31,7 +35,7 @@ namespace TechJobsConsole
 
         public static List<Dictionary<string, string>> FindAll()
         {
-            LoadData();           
+            LoadData();
 
             Dictionary<string, string>[] allJobsArray = new Dictionary<string, string>[AllJobs.Count];
             AllJobs.CopyTo(allJobsArray);
